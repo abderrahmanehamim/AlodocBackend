@@ -1,27 +1,53 @@
 package com.Stage.AloDoctor.models;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-@Entity
-public class Patient {
-	@Id
-	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-	private Long idPatient;
-private String firstname;
-private String lastname;
-private String email;
-private String password;
-private Long age;
-private String adresse;
-private String gender;
-private String phonenumber;
-@OneToMany(mappedBy = "patient")
-private List<Appointment> appointments;
+import jakarta.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import java.util.List;
 
+@Entity
+@Table(name = "patient")
+public class Patient {
+    @Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private Long idPatient;
+
+    @NotBlank(message = "First name is required")
+    private String firstname;
+
+    @NotBlank(message = "Last name is required")
+    private String lastname;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    private String email;
+
+    @NotBlank(message = "Password is required")
+    private String password;
+
+    @NotNull(message = "Age is required")
+    private String age;
+
+    @NotBlank(message = "Address is required")
+    private String adresse;
+
+    @NotBlank(message = "Gender is required")
+    private String gender;
+
+    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+    private String phonenumber;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "patient")
+    private List<Appointment> appointments;
 
 
 public Patient() {
@@ -31,8 +57,15 @@ public Patient() {
 
 
 
-public Patient(Long idPatient, String firstname, String lastname, String email, String password, Long age,
-		String adresse, String gender, String phonenumber, List<Appointment> appointments) {
+
+public Patient(Long idPatient, @NotBlank(message = "First name is required") String firstname,
+		@NotBlank(message = "Last name is required") String lastname,
+		@NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
+		@NotBlank(message = "Password is required") String password, @NotNull(message = "Age is required") @NotNull(message = "Age is required") String age,
+		@NotBlank(message = "Address is required") String adresse,
+		@NotBlank(message = "Gender is required") String gender,
+		@Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits") String phonenumber,
+		List<Appointment> appointments) {
 	super();
 	this.idPatient = idPatient;
 	this.firstname = firstname;
@@ -45,6 +78,7 @@ public Patient(Long idPatient, String firstname, String lastname, String email, 
 	this.phonenumber = phonenumber;
 	this.appointments = appointments;
 }
+
 
 
 
@@ -111,14 +145,14 @@ public void setPassword(String password) {
 /**
  * @return the age
  */
-public Long getAge() {
+public String getAge() {
 	return age;
 }
 /**
- * @param age the age to set
+ * @param string the age to set
  */
-public void setAge(Long age) {
-	this.age = age;
+public void setAge(String string) {
+	this.age = string;
 }
 /**
  * @return the adresse

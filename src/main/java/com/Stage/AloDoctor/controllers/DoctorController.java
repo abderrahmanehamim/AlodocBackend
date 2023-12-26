@@ -1,12 +1,9 @@
 package com.Stage.AloDoctor.controllers;
 
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,44 +15,56 @@ import com.Stage.AloDoctor.models.Appointment;
 import com.Stage.AloDoctor.models.Doctor;
 
 
-@Service
 @RestController
+@RequestMapping("/api/doctors")
 public class DoctorController {
-	@Autowired
+    @Autowired
     private DoctorService doctorService;
-	@Autowired
-	private AppointmentService appointmentservice;
+    @Autowired
+    private AppointmentService appointmentService;
 
-    @GetMapping("/doctors")
+    @GetMapping
     public List<Doctor> getAllDoctors() {
         return doctorService.getAllDoctors();
     }
 
-    @GetMapping("/doctors/{id}")
-    public Doctor getDoctorById(@PathVariable long id) {
-        return doctorService.getDoctorById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable long id) {
+        Doctor doctor = doctorService.getDoctorById(id);
+        if (doctor != null) {
+            return ResponseEntity.ok(doctor);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping("/doctors")
-    public Doctor createDoctor(@RequestBody Doctor doctor) {
-        return doctorService.createDoctor(doctor);
+    @PostMapping("/add")
+    public ResponseEntity<Doctor> createDoctor(@Valid @RequestBody Doctor doctor) {
+        Doctor createdDoctor = doctorService.createDoctor(doctor);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdDoctor);
     }
 
-    @PutMapping("/doctors/{id}")
-    public Doctor updateDoctor(@PathVariable long id, @RequestBody Doctor doctor) {
-        return doctorService.updateDoctor(id, doctor);
+    @PutMapping("/{id}")
+    public ResponseEntity<Doctor> updateDoctor(@PathVariable long id, @RequestBody Doctor doctor) {
+        Doctor updatedDoctor = doctorService.updateDoctor(id, doctor);
+        return ResponseEntity.ok(updatedDoctor);
     }
 
-    @DeleteMapping("/doctors/{id}")
-    public void deleteDoctor(@PathVariable long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDoctor(@PathVariable long id) {
         doctorService.deleteDoctor(id);
+        return ResponseEntity.noContent().build();
     }
-    @GetMapping("/{doctorId}/appointments")
+
+    @GetMapping("/doctors/{doctorId}/appointments")
     public List<Appointment> getDoctorAppointments(@PathVariable long doctorId) {
         return doctorService.getAppointments(doctorId);
     }
-    @PutMapping("/doctors/{doctorId}/appointments/{appointmentId}")
-    public Appointment updateAppointmentAcceptance(@PathVariable long doctorId, @PathVariable long appointmentId, @RequestBody String acceptance) {
-        return appointmentservice.updateAppointmentAcceptance(appointmentId, acceptance);
+
+    @PutMapping("/{doctorId}/appointments/{appointmentId}")
+    public ResponseEntity<Appointment> updateAppointmentAcceptance(
+            @PathVariable long doctorId, @PathVariable long appointmentId, @RequestBody String acceptance) {
+        Appointment updatedAppointment = appointmentService.updateAppointmentAcceptance(appointmentId, acceptance);
+        return ResponseEntity.ok(updatedAppointment);
     }
 }

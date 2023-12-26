@@ -3,12 +3,16 @@ package com.Stage.AloDoctor.models;
 import java.sql.Date;
 import java.sql.Time;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 @Entity
+@Table(name = "appointment")
 public class Appointment {
 	@Id
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
@@ -16,9 +20,11 @@ private Long Idappoint;
 private Date Dateappoint;
 private Time Timeappoint;
 private String acceptance;
+@JsonBackReference
 @ManyToOne
 @JoinColumn(name = "idDoctor")
 private Doctor doctor;
+@JsonBackReference
 @ManyToOne
 @JoinColumn(name = "idPatient")
 private Patient patient;

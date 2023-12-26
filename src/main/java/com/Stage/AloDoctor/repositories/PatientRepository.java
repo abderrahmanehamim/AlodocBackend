@@ -9,4 +9,5 @@ import com.Stage.AloDoctor.models.Patient;
 @RepositoryRestController
 @RepositoryEventHandler
 public interface PatientRepository extends JpaRepository<Patient, Long> {
+
 }
