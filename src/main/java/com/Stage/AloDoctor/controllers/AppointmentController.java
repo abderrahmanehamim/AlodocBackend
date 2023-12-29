@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.Stage.AloDoctor.Services.AppointmentService;
 import com.Stage.AloDoctor.models.Appointment;
+
 @RestController
 @RequestMapping("/api/appointments")
 public class AppointmentController {

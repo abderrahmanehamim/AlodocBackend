@@ -28,7 +28,7 @@ public class PatientController {
      return patientService.getPatientById(id);
  }
 
- @PostMapping("/add")
+ @PostMapping
  public Patient createNewPatient(@RequestBody Patient patient) {
      return patientService.createNewPatient(patient);
  }

@@ -19,7 +19,7 @@ import com.Stage.AloDoctor.repositories.PatientRepository;
 @SpringBootApplication
 @EntityScan(basePackages = "com.Stage.AloDoctor.models")
 public class AloDoctorApplication implements CommandLineRunner {
-/*
+
     @Autowired
     private DoctorRepository doctorRepository;
 
@@ -27,7 +27,7 @@ public class AloDoctorApplication implements CommandLineRunner {
     private PatientRepository patientRepository;
     @Autowired
     private AppointmentRepository appointmentRepository;
-*/
+
     public static void main(String[] args) {
         SpringApplication.run(AloDoctorApplication.class, args);
     }
@@ -38,8 +38,7 @@ public class AloDoctorApplication implements CommandLineRunner {
 		
 	}
 
-    
-    /*
+   /*
     @Override
     public void run(String... args) throws Exception {
         Doctor doctor1 = new Doctor();
