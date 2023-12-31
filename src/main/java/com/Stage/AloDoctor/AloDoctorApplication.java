@@ -31,14 +31,14 @@ public class AloDoctorApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(AloDoctorApplication.class, args);
     }
-
+    /*
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-   /*
+   */
     @Override
     public void run(String... args) throws Exception {
         Doctor doctor1 = new Doctor();
@@ -97,5 +97,5 @@ public class AloDoctorApplication implements CommandLineRunner {
         System.out.println("Appointment patient1 avec doctor 1 réussite");
         
     }
-    */
+   
 }

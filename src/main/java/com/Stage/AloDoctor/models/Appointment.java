@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.Time;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,10 +21,12 @@ private Long Idappoint;
 private Date Dateappoint;
 private Time Timeappoint;
 private String acceptance;
+@JsonIgnore
 @JsonBackReference
 @ManyToOne
 @JoinColumn(name = "idDoctor")
 private Doctor doctor;
+@JsonIgnore
 @JsonBackReference
 @ManyToOne
 @JoinColumn(name = "idPatient")

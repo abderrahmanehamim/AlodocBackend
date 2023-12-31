@@ -1,5 +1,6 @@
 package com.Stage.AloDoctor.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -7,10 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
+
 import java.util.List;
 
 @Entity
@@ -21,31 +19,30 @@ public class Patient {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private Long idPatient;
 
-    @NotBlank(message = "First name is required")
+  
     private String firstname;
 
-    @NotBlank(message = "Last name is required")
+
     private String lastname;
 
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+
     private String email;
 
-    @NotBlank(message = "Password is required")
+
     private String password;
 
-    @NotNull(message = "Age is required")
+   
     private String age;
 
-    @NotBlank(message = "Address is required")
+   
     private String adresse;
 
-    @NotBlank(message = "Gender is required")
+
     private String gender;
 
-    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+   
     private String phonenumber;
-
+    @JsonIgnore
     @JsonManagedReference
     @OneToMany(mappedBy = "patient")
     private List<Appointment> appointments;
@@ -59,14 +56,12 @@ public Patient() {
 
 
 
-public Patient(Long idPatient, @NotBlank(message = "First name is required") String firstname,
-		@NotBlank(message = "Last name is required") String lastname,
-		@NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
-		@NotBlank(message = "Password is required") String password, @NotNull(message = "Age is required") @NotNull(message = "Age is required") String age,
-		@NotBlank(message = "Address is required") String adresse,
-		@NotBlank(message = "Gender is required") String gender,
-		@Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits") String phonenumber,
-		List<Appointment> appointments) {
+
+
+
+
+public Patient(Long idPatient, String firstname, String lastname, String email, String password, String age,
+		String adresse, String gender, String phonenumber, List<Appointment> appointments) {
 	super();
 	this.idPatient = idPatient;
 	this.firstname = firstname;
@@ -79,6 +74,10 @@ public Patient(Long idPatient, @NotBlank(message = "First name is required") Str
 	this.phonenumber = phonenumber;
 	this.appointments = appointments;
 }
+
+
+
+
 
 
 

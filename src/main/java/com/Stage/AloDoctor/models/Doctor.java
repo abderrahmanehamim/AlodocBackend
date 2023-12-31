@@ -1,5 +1,6 @@
 package com.Stage.AloDoctor.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
@@ -8,11 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -23,45 +20,40 @@ public class Doctor {
     @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
     private long idDoctor;
 
-    @NotBlank(message = "Name cannot be blank")
+  
     private String name;
-    @NotBlank(message = "Email is required")
-    @Email(message = "Invalid email format")
+
     private String email;
 
-    @NotBlank(message = "password cannot be blank")
-    private String password;
+     private String password;
 
-    @NotBlank(message = "Specialty cannot be blank")
     private String specialite;
 
-    @NotBlank(message = "City cannot be blank")
+ 
     private String city;
 
-    @NotBlank(message = "Title cannot be blank")
     private String title;
 
     private String photo;
 
-    @Size(min = 1, message = "At least one act is required")
+ 
     private String[] actes;
 
-    @NotNull(message = "Cabinet information is required")
+ 
     private Boolean cabinet;
 
-    @NotNull(message = "Adomicile information is required")
     private Boolean adomicile;
 
-    @NotNull(message = "Videocall information is required")
+ 
     private Boolean videocall;
 
     private String adresse;
 
-    @Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits")
+ 
     private String numtele;
 
     private String numcabinet;
-
+    @JsonIgnore
     @JsonManagedReference
     @OneToMany(mappedBy = "doctor")
     private List<Appointment> appointments;
@@ -72,18 +64,12 @@ public class Doctor {
 	}
 
 
-	public Doctor(long idDoctor, @NotBlank(message = "Name cannot be blank") String name,
-			@NotBlank(message = "Email is required") @Email(message = "Invalid email format") String email,
-			@NotBlank(message = "password cannot be blank") String password,
-			@NotBlank(message = "Specialty cannot be blank") String specialite,
-			@NotBlank(message = "City cannot be blank") String city,
-			@NotBlank(message = "Title cannot be blank") String title, String photo,
-			@Size(min = 1, message = "At least one act is required") String[] actes,
-			@NotNull(message = "Cabinet information is required") Boolean cabinet,
-			@NotNull(message = "Adomicile information is required") Boolean adomicile,
-			@NotNull(message = "Videocall information is required") Boolean videocall, String adresse,
-			@Pattern(regexp = "\\d{10}", message = "Phone number must be 10 digits") String numtele, String numcabinet,
-			List<Appointment> appointments) {
+	
+
+
+	public Doctor(long idDoctor, String name, String email, String password, String specialite, String city,
+			String title, String photo, String[] actes, Boolean cabinet, Boolean adomicile, Boolean videocall,
+			String adresse, String numtele, String numcabinet, List<Appointment> appointments) {
 		super();
 		this.idDoctor = idDoctor;
 		this.name = name;
@@ -102,6 +88,9 @@ public class Doctor {
 		this.numcabinet = numcabinet;
 		this.appointments = appointments;
 	}
+
+
+
 
 
 	/**

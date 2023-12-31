@@ -3,11 +3,11 @@ package com.Stage.AloDoctor.controllers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.Stage.AloDoctor.Services.AppointmentService;
 import com.Stage.AloDoctor.Services.DoctorService;
@@ -39,7 +39,7 @@ public class DoctorController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Doctor> createDoctor(@Valid @RequestBody Doctor doctor) {
+    public ResponseEntity<Doctor> createDoctor(@Validated @RequestBody Doctor doctor) {
         Doctor createdDoctor = doctorService.createDoctor(doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDoctor);
     }
