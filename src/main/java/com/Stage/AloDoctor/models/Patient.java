@@ -3,6 +3,7 @@ package com.Stage.AloDoctor.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -44,7 +45,7 @@ public class Patient {
     private String phonenumber;
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
 
 

@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Bean;
 
 import com.Stage.AloDoctor.models.Appointment;
 import com.Stage.AloDoctor.models.Doctor;
@@ -31,14 +32,15 @@ public class AloDoctorApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(AloDoctorApplication.class, args);
     }
-    /*
+    
 	@Override
 	public void run(String... args) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+	
 
-   */
+	/*
     @Override
     public void run(String... args) throws Exception {
         Doctor doctor1 = new Doctor();
@@ -97,5 +99,5 @@ public class AloDoctorApplication implements CommandLineRunner {
         System.out.println("Appointment patient1 avec doctor 1 réussite");
         
     }
-   
+    */
 }

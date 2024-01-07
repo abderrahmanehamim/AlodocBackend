@@ -14,7 +14,7 @@ import com.Stage.AloDoctor.Services.DoctorService;
 import com.Stage.AloDoctor.models.Appointment;
 import com.Stage.AloDoctor.models.Doctor;
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api/doctors")
 public class DoctorController {
@@ -38,8 +38,8 @@ public class DoctorController {
         }
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Doctor> createDoctor(@Validated @RequestBody Doctor doctor) {
+    @PostMapping
+    public ResponseEntity<Doctor> createDoctor(@RequestBody Doctor doctor) {
         Doctor createdDoctor = doctorService.createDoctor(doctor);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdDoctor);
     }
