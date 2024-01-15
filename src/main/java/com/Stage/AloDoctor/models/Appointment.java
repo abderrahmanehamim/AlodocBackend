@@ -2,6 +2,7 @@ package com.Stage.AloDoctor.models;
 
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -19,7 +20,7 @@ public class Appointment {
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
 private Long Idappoint;
 private Date Dateappoint;
-private Time Timeappoint;
+private LocalTime Timeappoint;
 private String acceptance;
 @JsonIgnore
 @JsonBackReference
@@ -32,7 +33,7 @@ private Doctor doctor;
 @JoinColumn(name = "idPatient")
 private Patient patient;
 
-public Appointment(Long idappoint, Date dateappoint, Time timeappoint, String acceptance, Doctor doctor,
+public Appointment(Long idappoint, Date dateappoint, LocalTime timeappoint, String acceptance, Doctor doctor,
 		Patient patient) {
 	super();
 	Idappoint = idappoint;
@@ -73,13 +74,13 @@ public void setDateappoint(Date dateappoint) {
 /**
  * @return the timeappoint
  */
-public Time getTimeappoint() {
+public LocalTime getTimeappoint() {
 	return Timeappoint;
 }
 /**
  * @param timeappoint the timeappoint to set
  */
-public void setTimeappoint(Time timeappoint) {
+public void setTimeappoint(LocalTime timeappoint) {
 	Timeappoint = timeappoint;
 }
 /**

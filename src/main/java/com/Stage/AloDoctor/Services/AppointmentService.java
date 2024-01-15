@@ -1,5 +1,7 @@
 package com.Stage.AloDoctor.Services;
 
+import java.sql.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -19,4 +21,5 @@ public interface AppointmentService {
 	    List<Appointment> getAppointmentsByDoctorId(Long id);
 	    List<Appointment> getAppointmentsByPatientId(Long id);
 	    Appointment updateAppointmentAcceptance(long appointmentId, String acceptance);
+	    Appointment scheduleAppointment(Long patientId, Long doctorId, Date date, LocalTime time);
 }

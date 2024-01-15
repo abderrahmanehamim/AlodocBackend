@@ -45,7 +45,7 @@ public class DoctorServiceImpl implements DoctorService {
         Optional<Doctor> optionalExistingDoctor = doctorRepository.findById(id);
         if (optionalExistingDoctor.isPresent()) {
             Doctor existingDoctor = optionalExistingDoctor.get();
-            // Update fields
+           
             existingDoctor.setName(doctor.getName());
             existingDoctor.setSpecialite(doctor.getSpecialite());
             existingDoctor.setCity(doctor.getCity());
@@ -72,7 +72,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public List<Appointment> getAppointments(long doctorId) {
+    public List<Appointment> getDoctorAppointments(long doctorId) {
         logger.info("Fetching appointments for doctor with id {}", doctorId);
         Optional<Doctor> optionalDoctor = doctorRepository.findById(doctorId);
         if (optionalDoctor.isPresent()) {

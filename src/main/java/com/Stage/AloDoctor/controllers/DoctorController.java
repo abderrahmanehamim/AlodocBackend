@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import com.Stage.AloDoctor.Services.AppointmentService;
 import com.Stage.AloDoctor.Services.DoctorService;
 import com.Stage.AloDoctor.models.Appointment;
+import com.Stage.AloDoctor.models.AppointmentDTO;
 import com.Stage.AloDoctor.models.Doctor;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -56,9 +58,25 @@ public class DoctorController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/doctors/{doctorId}/appointments")
-    public List<Appointment> getDoctorAppointments(@PathVariable long doctorId) {
-        return doctorService.getAppointments(doctorId);
+    @GetMapping("/{doctorId}/appointments")
+    public ResponseEntity<List<AppointmentDTO>> getDoctorAppointments(@PathVariable long doctorId) {
+        List<Appointment> appointments = doctorService.getDoctorAppointments(doctorId);
+        if (appointments != null && !appointments.isEmpty()) {
+            List<AppointmentDTO> appointmentDTOs = appointments.stream()
+                    .map(appointment -> new AppointmentDTO(
+                            appointment.getIdappoint(),
+                            appointment.getDateappoint(),
+                            appointment.getTimeappoint(),
+                            appointment.getAcceptance(),
+                      
+                            appointment.getPatient()
+                    ))
+                    .collect(Collectors.toList());
+
+            return ResponseEntity.ok(appointmentDTOs);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PutMapping("/{doctorId}/appointments/{appointmentId}")

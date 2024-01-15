@@ -1,5 +1,7 @@
 package com.Stage.AloDoctor.controllers;
 
+import java.sql.Date;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Stage.AloDoctor.Services.AppointmentService;
@@ -55,5 +58,14 @@ public class AppointmentController {
     @DeleteMapping("/{id}")
     public void deleteAppointment(@PathVariable Long id) {
         appointmentService.deleteAppointment(id);
+    }
+    @PostMapping("/schedule")
+    public Appointment scheduleAppointment(
+            @RequestParam Long patientId,
+            @RequestParam Long doctorId,
+            @RequestParam String date,
+            @RequestParam LocalTime time) {
+    	 Date parsedDate = Date.valueOf(date);
+        return appointmentService.scheduleAppointment(patientId, doctorId, parsedDate, time);
     }
 }

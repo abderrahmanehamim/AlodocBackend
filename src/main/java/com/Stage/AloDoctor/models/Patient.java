@@ -16,10 +16,9 @@ import java.util.List;
 @Table(name = "patient")
 
 public class Patient {
-    @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
-    private Long idPatient;
-
+	 @Id
+	    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+	    private Long idPatient;
   
     private String firstname;
 
@@ -45,8 +44,9 @@ public class Patient {
     private String phonenumber;
     @JsonIgnore
     @JsonManagedReference
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "patient",  cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Appointment> appointments;
+
 
 
 public Patient() {

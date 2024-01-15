@@ -10,7 +10,7 @@ import com.Stage.AloDoctor.models.Doctor;
 public interface DoctorService {
 
     List<Doctor> getAllDoctors();
-    List<Appointment> getAppointments(long doctorId);
+    List<Appointment> getDoctorAppointments(long doctorId);
 
     Doctor getDoctorById(long id);
 

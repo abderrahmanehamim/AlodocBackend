@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.Stage.AloDoctor.Services.PatientService;
+import com.Stage.AloDoctor.models.Appointment;
 import com.Stage.AloDoctor.models.Patient;
 import com.Stage.AloDoctor.repositories.PatientRepository;
 @Service
@@ -49,5 +50,14 @@ public class PatientServiceImpl implements PatientService{
     public void deletePatient(Long id) {
         patientRepository.deleteById(id);
     }
+
+	@Override
+	public List<Appointment> getPatientAppointments(Long patientId) {
+		 Patient patient = patientRepository.findById(patientId).orElse(null);
+		 if (patient != null) {
+	            return patient.getAppointments();
+	        }
+		return null;
+	}
 
 }
